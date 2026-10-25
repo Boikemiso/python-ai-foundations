@@ -1,1 +1,1 @@
-# python-ai-foundations
+# python-ai-foundations — Week 1: Python fundamentals
