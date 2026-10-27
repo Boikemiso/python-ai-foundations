@@ -1,1 +1,2 @@
-# python-ai-foundations — Week 1: Python fundamentals
+## 🏆 Certifications
+* [Python](https://www.kaggle.com/learn/certification/boikemisomosheshe/python) - Kaggle
