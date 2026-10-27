@@ -1,5 +1,6 @@
 import json
 import requests
+import sqlite3
 
 # --- PART 1: Reading the local JSON file ---
 print("Reading local JSON file")
@@ -28,3 +29,32 @@ try:
 except Exception as e:
     print("Error: Could not connect to the API.")
     print(f"Details: {e}")
+
+# --- PART 3: Basic SQL ---
+print("Saving to database")
+
+# Connect to a database
+conn = sqlite3.connect("jokes.db")
+cursor = conn.cursor()
+
+# Created table
+cursor.execute("""
+   CREATE TABLE IF NOT EXISTS saved_jokes(
+      id INTEGER PRIMARY KEY,
+      setup TEXT,
+      punchline TEXT
+)
+""")
+
+if "joke_data" in locals():
+    cursor.execute(
+        "INSERT INTO saved_jokes(setup, punchline) VALUES(?, ?)",
+        (joke_data["setup"], joke_data["punchline"]),
+    )
+    conn.commit()
+    print("Joke successfully saved to database!")
+
+    cursor.execute("SELECT * FROM saved_jokes")
+    print(f"Database now contains {len(cursor.fetchall())} joke(s).")
+
+conn.close()
